@@ -1,0 +1,21 @@
+name: Check for Broken Links
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 3 * * 1'  # Every Monday at 3:00 AM UTC
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install lychee
+        uses: lycheeverse/lychee-action@v1.8.0
+        with:
+          args: --verbose --no-progress https://aryanyadav.github.io/my-portfolio/
